@@ -1,0 +1,16 @@
+- hosts: webservers
+  become: yes
+  tasks:
+    - name: Stop existing container
+      docker_container:
+        name: devops-demo
+        state: absent
+
+    - name: Run new container
+      docker_container:
+        name: devops-demo
+        image: "yourdockerhubuser/devops-demo:{{ image_tag }}"
+        state: started
+        restart_policy: always
+        published_ports:
+          - 80:5000
