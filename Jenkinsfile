@@ -1,12 +1,12 @@
 pipeline {
     agent any
     environment {
-        IMAGE_NAME = "yourdockerhubuser/devops-demo:${GIT_COMMIT}"
+        IMAGE_NAME = "mukesh2007pandey/devops-demo:${GIT_COMMIT}"
     }
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/yourusername/devops-pipeline-demo.git'
+                git 'https://github.com/mukesh2007pandey/devops-pipeline-demo.git'
             }
         }
         stage('Build Image') {
@@ -16,9 +16,9 @@ pipeline {
         }
         stage('Push Image') {
             steps {
-                withCredentials([string(credentialsId: 'dockerhub-password', variable: 'DOCKER_PASS')]) {
+                withCredentials([string(credentialsId: 'Ericsson@123', variable: 'DOCKER_PASS')]) {
                     sh '''
-                        echo $DOCKER_PASS | docker login -u yourdockerhubuser --password-stdin
+                        echo $DOCKER_PASS | docker login -u mukesh2007pandey --password-stdin
                         docker push $IMAGE_NAME
                     '''
                 }
